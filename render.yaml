@@ -1,0 +1,42 @@
+services:
+  # ─── FastAPI Backend Web Service ──────────────────────────────────────────
+  - type: web
+    name: libranest-api
+    env: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: ENVIRONMENT
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 480
+      - key: CORS_ORIGINS
+        value: https://libranest-ui.onrender.com,http://localhost:5173
+      - key: DATABASE_URL
+        # Set to Neon PostgreSQL in Render dashboard or use SQLite fallback for demonstration
+        value: sqlite:///./libranest.db
+
+  # ─── React Frontend Static Site ───────────────────────────────────────────
+  - type: web
+    name: libranest-ui
+    env: static
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://libranest-api.onrender.com

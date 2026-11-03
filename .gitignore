@@ -1,0 +1,50 @@
+# Library Management System
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+
+# Backend
+backend/.env
+backend/libranest.db
+backend/test_libranest.db
+backend/pip_install*.log
+backend/alembic.ini.bak
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+*.env
+!.env.example
+!frontend/.env.example
+
+# Logs
+*.log
+backend/pip*.log
+pip*.log
+npm-debug.log*
+yarn-error.log
