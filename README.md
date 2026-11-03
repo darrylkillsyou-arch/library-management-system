@@ -187,18 +187,27 @@ cd backend
 
 ---
 
-## 🌐 Production Deployment Guide
+## 🌐 Live Production Deployment
 
-LIBRANEST includes a zero-cost production blueprint configured for **Render** and **Neon PostgreSQL**:
+LIBRANEST is deployed and active in production:
 
-### Render Blueprint Deployment
-1. Push this repository to GitHub.
-2. In the [Render Dashboard](https://dashboard.render.com), click **New +** > **Blueprint**.
-3. Select your `library-management-system` repository.
-4. Render detects `render.yaml` and provisions:
-   - **FastAPI Web Service:** `libranest-api`
-   - **React Static Site:** `libranest-ui`
-5. Connect your Neon PostgreSQL `DATABASE_URL` in the `libranest-api` environment variables.
+| Service | Target | Production URL | Status |
+| :--- | :--- | :--- | :--- |
+| **Frontend UI** | Render Static Site | [https://libranest-ui.onrender.com](https://libranest-ui.onrender.com) | ✅ LIVE (HTTP 200) |
+| **Backend API** | Render Web Service | [https://libranest-api.onrender.com](https://libranest-api.onrender.com) | ✅ LIVE (HTTP 200) |
+| **Interactive Docs** | OpenAPI / Swagger UI | [https://libranest-api.onrender.com/docs](https://libranest-api.onrender.com/docs) | ✅ LIVE (HTTP 200) |
+| **Health Check** | Health Probe | [https://libranest-api.onrender.com/health](https://libranest-api.onrender.com/health) | ✅ LIVE (`{"status":"ok"}`) |
+| **Database** | Managed PostgreSQL | Render Postgres (`libranest_db`, Singapore) | ✅ LIVE (Alembic Migrated) |
+| **Source Code** | GitHub Repository | [https://github.com/darrylkillsyou-arch/library-management-system](https://github.com/darrylkillsyou-arch/library-management-system) | ✅ LIVE (main branch) |
+
+### 🔑 Demo Accounts for Faculty & Evaluators
+
+| Role | Email / Username | Password | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Admin / Librarian** | `admin@libranest.demo` | `Admin@123` | Full administrative control, issue/return books, inventory, reports, fines |
+| **Student (At Quota)** | `aakash@libranest.demo` | `Student@123` | Demonstrates 2-loan limit (already has 2 active loans) |
+| **Student (Clear)** | `priya@libranest.demo` | `Student@123` | Demonstrates fresh catalogue browsing and borrowing |
+| **Student (Overdue)** | `rohit@libranest.demo` | `Student@123` | Demonstrates overdue loan and ₹2.00/day fine calculation |
 
 ---
 
