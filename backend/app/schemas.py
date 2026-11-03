@@ -199,10 +199,10 @@ class LoanOut(BaseModel):
     overdue_days: Optional[int] = 0
 
     # nested
-    copy: Optional[BookCopyOut] = None
+    book_copy: Optional[BookCopyOut] = Field(default=None, alias="copy")
     member: Optional[MemberOut] = None
 
-    model_config = {"from_attributes": True}
+    model_config = {"from_attributes": True, "populate_by_name": True}
 
 
 # ─── Dashboard ────────────────────────────────────────────────────────────────
